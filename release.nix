@@ -64,7 +64,7 @@ let
   deps = pkgs.buildEnv {
     name = "deps";
     paths = [
-      (pkgs.haskell.packages.ghccustom.ghcWithPackages (_: ghc.backend.buildInputs ++ ghc.backend.propagatedBuildInputs))
+      # (pkgs.haskell.packages.ghccustom.ghcWithPackages (_: ghc.frontend.buildInputs ++ ghc.backend.propagatedBuildInputs))
       (pkgs.haskell.packages.ghcjscustom.ghcWithPackages (_: ghcjs.frontend.buildInputs ++ ghcjs.frontend.propagatedBuildInputs))
     ];
     buildInputs = [ ];

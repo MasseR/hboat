@@ -1,40 +1,39 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RecordWildCards            #-}
+{-# LANGUAGE DataKinds        #-}
+{-# LANGUAGE DeriveGeneric    #-}
+{-# LANGUAGE LambdaCase       #-}
+{-# LANGUAGE RecordWildCards  #-}
+{-# LANGUAGE TypeApplications #-}
 module Main where
 
-import           Control.Monad.Trans              (liftIO)
+import qualified Component.Subscription           as Subscription
+import           Control.Lens                     (set)
+import           Data.Bifunctor                   (bimap)
+import           Data.Generics.Product            (typed)
+import           GHC.Generics                     (Generic)
 import           Language.Javascript.JSaddle.Warp
-import           Miso
-import           Miso.String
+import           Miso                             hiding (set)
 
-data Action = Add
-            | Subtract
-            | SayHello
-            | NoOp
+data Action = NoOp
+            | SubscriptionAction Subscription.Action
 
-newtype Model = Model Int deriving (Eq, Num, ToMisoString)
+newtype Model = Model { subscription :: Subscription.Model } deriving (Eq, Generic)
 
-updateModel :: Action -> Model -> Effect Action Model
-updateModel Add m      = noEff (m + 1)
-updateModel Subtract m = noEff (m - 1)
-updateModel SayHello m = m <# (liftIO (putStrLn "Hello world") >> pure NoOp)
-updateModel NoOp m     = noEff m
+updateModel :: Model -> Action -> Effect Action Model
+updateModel m@Model{..} = \case
+  NoOp -> noEff m
+  SubscriptionAction act -> bimap SubscriptionAction (flip (set (typed @Subscription.Model)) m)
+    $ Subscription.update subscription act
 
 viewModel :: Model -> View Action
-viewModel x =
-  div_ [] [ button_  [ onClick Add ] [ text "+" ]
-          , text (ms x)
-          , button_ [ onClick Subtract ] [ text "-" ]
-  ]
+viewModel Model{..} =
+  div_ [] [ SubscriptionAction <$> Subscription.view subscription ]
 
 main :: IO ()
 main = run 8081 $ startApp App{..}
   where
-    model = Model 0
-    initialAction = SayHello
-    update = updateModel
+    model = Model Subscription.initModel
+    initialAction = NoOp
+    update = flip updateModel
     view = viewModel
     subs = []
     events = defaultEvents

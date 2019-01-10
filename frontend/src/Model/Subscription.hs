@@ -1,0 +1,1 @@
+module Model.Subscription where
