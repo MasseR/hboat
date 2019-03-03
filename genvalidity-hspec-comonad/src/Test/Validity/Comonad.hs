@@ -23,7 +23,7 @@ comonadSpecWithInts ::
   forall (f :: * -> * ). (Eq (f Int), Show (f Int), Functor f, Typeable f, GenValid (f Int), Comonad f)
   => Gen (f Int)
   -> Spec
-comonadSpecWithInts gen = comonadSpecOnGens @f @Int genUnchecked "int" gen (unwords [nameOf @f, "of ints"]) ((+) <$> genUnchecked) "increments" ((*) <$> genUnchecked) "scalings"
+comonadSpecWithInts gen = comonadSpecOnGens gen (unwords [nameOf @f, "of ints"])
 
 extendTypeStr :: forall (f :: * -> *). (Typeable f) => String
 extendTypeStr = unwords ["extend", "::", "(", nameOf @f, "->", "a", ")", "->", nameOf @f, "->", nameOf @f, "a"]
@@ -35,30 +35,20 @@ duplicateStr :: forall (f :: * -> *). (Typeable f) => String
 duplicateStr = unwords ["duplicate", "::", nameOf @f, "a", "->", nameOf @f, "(", nameOf @f, "a", ")"]
 
 comonadSpecOnGens ::
-  forall (f :: * -> *) (a :: *) (b :: *) (c :: *).
+  forall (f :: * -> *) (a :: *).
        ( Show a
        , Show (f a)
-       , Show (f a)
-       , Show (f c)
        , Eq (f a)
-       , Eq (f c)
        , Functor f
        , Comonad f
        , Typeable f
        , Typeable a
-       , Typeable b
-       , Typeable c
        )
-  => Gen a
-  -> String
-  -> Gen (f a)
-  -> String
-  -> Gen (b -> c)
-  -> String
-  -> Gen (a -> b)
+  =>
+  Gen (f a)
   -> String
   -> Spec
-comonadSpecOnGens gena genaname gen genname genf genfname geng gengname =
+comonadSpecOnGens gen genname =
   parallel $
     describe ("Comonad " <> nameOf @f) $ do
       describe (unwords [extendTypeStr @f, "and", extractTypeStr @f]) $ do
