@@ -5,5 +5,5 @@ import Test.Hspec
 import qualified Test.Data.Zipper
 
 main :: IO ()
-main = hspec $ do
+main = hspec
   Test.Data.Zipper.spec
