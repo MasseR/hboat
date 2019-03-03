@@ -17,7 +17,7 @@ in
   haskellPackages = haskellPackages;
   packages = {
     # common = ./common;
-    # backend = ./backend;
+    backend = ./backend;
     frontend = ./frontend;
   };
   overrides = self: super: {
