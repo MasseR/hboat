@@ -28,7 +28,7 @@ let
       cabal-install
       hasktags
       hlint
-      (haskellPackages'.ghcWithHoogle (pkgs: pkg.buildInputs ++ pkg.propagatedBuildInputs))
+      (haskellPackages'.ghcWithPackages (pkgs: pkg.buildInputs ++ pkg.propagatedBuildInputs))
     ];
   in
   {
