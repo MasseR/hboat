@@ -228,5 +228,9 @@ language_extensions:
   - TypeApplications
   - OverloadedStrings
   - NoImplicitPrelude
+  - DeriveGeneric
+  - DeriveFunctor
+  - RecordWildCards
+  - LambdaCase
   # - TemplateHaskell
   # - QuasiQuotes

@@ -24,6 +24,7 @@ let
   let
     n =  "${name}-shell";
     deps = with haskellPackages'; [
+      nixpkgs.pkgs.binutils
       ghcid
       cabal-install
       hasktags
