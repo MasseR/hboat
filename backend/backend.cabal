@@ -51,3 +51,4 @@ test-suite spec
                      , hspec
                      , genvalidity
                      , genvalidity-hspec
+                     , genvalidity-hspec-comonad

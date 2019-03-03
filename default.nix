@@ -19,6 +19,7 @@ in
     common = ./common;
     backend = ./backend;
     frontend = ./frontend;
+    genvalidity-hspec-comonad = ./genvalidity-hspec-comonad;
   };
   overrides = self: super: {
     generic-lens = nixpkgs.haskell.lib.dontCheck super.generic-lens;
