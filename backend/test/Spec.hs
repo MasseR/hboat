@@ -2,5 +2,8 @@ module Main where
 
 import Test.Hspec
 
+import qualified Test.Data.Zipper
+
 main :: IO ()
-main = hspec $ return ()
+main = hspec $ do
+  Test.Data.Zipper.spec

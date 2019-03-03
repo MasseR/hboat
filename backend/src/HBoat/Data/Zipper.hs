@@ -1,14 +1,16 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE DeriveAnyClass #-}
 module HBoat.Data.Zipper where
 
 import CustomPrelude
 import Control.Comonad
+import Data.GenValidity
 
 data Zipper a = Zipper { lefts :: [a]
                        , value :: !a
                        , rights :: [a] }
-              deriving (Generic, Show, Functor)
+              deriving (Eq, Generic, Show, Functor, GenUnchecked, GenValid, Validity)
 
 instance Applicative Zipper where
   pure a = Zipper [] a []
@@ -30,16 +32,3 @@ rightward = extend right
 right :: Zipper a -> a
 right Zipper{..} = fromMaybe value . listToMaybe $ rights
 
--- data Tape a = Tape { leftward :: a
---                    , rightward :: a }
---             deriving (Generic, Functor)
---
--- instance Representable Tape where
---   type Rep Tape = Either () ()
---   index Tape{..} = \case
---     Left () -> leftward
---     Right () -> rightward
---   tabulate f = Tape (f (Left ())) (f (Right ()))
---
--- instance Distributive Tape where
---   distribute = distributeRep

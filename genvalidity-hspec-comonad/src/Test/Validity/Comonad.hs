@@ -1,6 +1,7 @@
 {-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeApplications #-}
 module Test.Validity.Comonad where
 
 import Data.GenValidity
@@ -17,7 +18,7 @@ comonadSpecOnValid ::
   forall (f :: * -> * ). (Eq (f Int), Show (f Int), Functor f, Typeable f, GenValid (f Int), Comonad f)
   => Spec
 comonadSpecOnValid = comonadSpecWithInts @f genValid
---
+
 comonadSpecWithInts ::
   forall (f :: * -> * ). (Eq (f Int), Show (f Int), Functor f, Typeable f, GenValid (f Int), Comonad f)
   => Gen (f Int)
