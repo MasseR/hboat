@@ -13,3 +13,6 @@ class Monad m => MonadFeed m where
 
 parseFeed :: LByteString -> Either FeedError Feed
 parseFeed = maybe (Left DecodeFailure) Right . Feed.parseFeedSource
+
+fetchFeeds :: (MonadFeed m, Traversable t) => t URL -> m (t (Either FeedError Feed))
+fetchFeeds = traverse fetchFeed
