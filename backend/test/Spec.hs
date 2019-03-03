@@ -1,4 +1,6 @@
 module Main where
 
+import Test.Hspec
+
 main :: IO ()
-main = undefined
+main = hspec $ return ()
