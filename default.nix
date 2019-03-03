@@ -16,7 +16,7 @@ in
 (import ./project.nix nixpkgs) {
   haskellPackages = haskellPackages;
   packages = {
-    # common = ./common;
+    common = ./common;
     backend = ./backend;
     frontend = ./frontend;
   };

@@ -9,5 +9,7 @@ before_script:
 
 script:
   - nix run nixpkgs.haskellPackages.hlint -c hlint frontend
+  - nix run nixpkgs.haskellPackages.hlint -c hlint backend
+  - nix run nixpkgs.haskellPackages.hlint -c hlint common
   - nix build -f ./release.nix --option trusted-public-keys "masser-ebook-manager.cachix.org-1:mtFSkQ2MO5MvjUpulZoFKjKUIa8g8CTcdPVuJaPKS1w= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" --option binary-caches "https://masser-ebook-manager.cachix.org https://cache.nixos.org" ghc.frontend ghc.backend
   - nix-build ./release.nix --option trusted-public-keys "masser-ebook-manager.cachix.org-1:mtFSkQ2MO5MvjUpulZoFKjKUIa8g8CTcdPVuJaPKS1w= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" --option binary-caches "https://masser-ebook-manager.cachix.org https://cache.nixos.org" -A ghcjs.frontend
