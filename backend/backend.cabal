@@ -17,8 +17,8 @@ extra-source-files:  CHANGELOG.md
 
 library
   -- exposed-modules:
-  exposed-modules:     HBoat.Control.Feed
-                     , HBoat.Data.Zipper
+  exposed-modules:     Control.Monad.Feed
+                     , Data.Zipper
   -- other-extensions:
   extensions:          NoImplicitPrelude
                      , TypeApplications

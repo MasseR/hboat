@@ -1,7 +1,7 @@
 {-# LANGUAGE TypeApplications #-}
 module Test.Data.Zipper where
 
-import           HBoat.Data.Zipper
+import           Data.Zipper
 import           Test.Hspec
 import           Test.Validity.Functor
 import           Test.Validity.Applicative

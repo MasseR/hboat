@@ -1,7 +1,7 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE DeriveAnyClass #-}
-module HBoat.Data.Zipper where
+module Data.Zipper where
 
 import CustomPrelude
 import Control.Comonad

@@ -1,4 +1,4 @@
-module HBoat.Control.Feed where
+module Control.Monad.Feed where
 
 import           CustomPrelude
 import qualified Text.Feed.Import as Feed
