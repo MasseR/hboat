@@ -12,6 +12,7 @@ module CustomPrelude
   , foldl'
   , scanl'
   , tshow
+  , readMay
   )
   where
 
@@ -32,3 +33,9 @@ type LByteString = LB.ByteString
 
 tshow :: Show a => a -> T.Text
 tshow = T.pack . show
+
+readMay :: Read a => String -> Maybe a
+readMay s =
+  case reads s of
+       [] -> Nothing
+       (a, _) : _ -> pure a
