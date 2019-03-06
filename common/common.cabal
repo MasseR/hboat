@@ -25,5 +25,6 @@ library
                      , transformers
                      , text
                      , bytestring
+                     , directory
   hs-source-dirs:      src
   default-language:    Haskell2010
