@@ -20,6 +20,7 @@ library
   exposed-modules:     Control.Monad.Feed
                      , Data.Zipper
                      , HBoat.Types
+                     , HBoat.SQLite.Migrations
   -- other-extensions:
   extensions:          NoImplicitPrelude
                      , TypeApplications
@@ -35,12 +36,16 @@ library
                      , mtl
                      , free
                      , text
+                     , filepath
+                     , lens
+                     , generic-lens
                      , bytestring
                      , common
                      , comonad
                      , adjunctions
                      , distributive
                      , genvalidity
+                     , sqlite-simple
   hs-source-dirs:      src
   default-language:    Haskell2010
 
