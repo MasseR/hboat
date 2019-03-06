@@ -41,16 +41,3 @@ instance Comonad Zipper where
   -- extend f Zipper{..} = Zipper (fmap (f . pure) lefts) (f (pure value)) (fmap (f . pure) rights)
   duplicate z@Zipper{..} = Zipper (drop 1 $ scanl' (\acc _ -> acc `tug` L) z lefts) z (drop 1 $ scanl' (\acc _ -> acc `tug` R) z rights)
 
-
-left :: Zipper a -> a
-left Zipper{..} = fromMaybe value . listToMaybe $ lefts
-
-leftward :: Zipper a -> Zipper a
-leftward = extend left
-
-rightward :: Zipper a -> Zipper a
-rightward = extend right
-
-right :: Zipper a -> a
-right Zipper{..} = fromMaybe value . listToMaybe $ rights
-
