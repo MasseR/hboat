@@ -19,6 +19,7 @@ library
   -- exposed-modules:
   exposed-modules:     Control.Monad.Feed
                      , Data.Zipper
+                     , HBoat.Types
   -- other-extensions:
   extensions:          NoImplicitPrelude
                      , TypeApplications
@@ -32,6 +33,7 @@ library
                      , stm
                      , async
                      , mtl
+                     , free
                      , text
                      , bytestring
                      , common
